@@ -2,6 +2,14 @@ package com.example.lzl.java.niukelib.topic;
 
 import java.util.LinkedList;
 
+/**
+ * 计算String求结果，包含(),+,-,*,/
+ * 1.通过链表对数字和符号进行存储，方便从后加入，从前提取。
+ * 2.以（）为小集合进行一次结果的计算。
+ * 3.先对*，/进行处理最后计算+，-
+ *
+ * 求和 加数的计算注意！的添加
+ */
 public class nibolan {
     public static void main(String[] args){
 //        -1764 420 1 -12 7 -1
@@ -38,21 +46,32 @@ public class nibolan {
         int temp = 0;
         while(i<chars.length&&chars[i]!=')'){
             if(chars[i]>='0'&&chars[i]<='9'){
+                //对数字进行拼接存储
                 temp = temp*10+chars[i++]-'0';
             }else if(chars[i]!='('){
+                //将数字进行处理存入链表
                 addNumber(temp,list,list2);
                 temp = 0;
+                //将符号加入链表
                 list.addLast(chars[i++]+"");
             }else{
+                //为')'的时候进行的一次结果的计算
                 int[] p = value(chars,i+1);
                 temp = p[0];
                 i = p[1]+1;
             }
         }
         addNumber(temp,list,list2);
+        //求和返回。
         return new int[]{getSum(list,list2),i};
     }
 
+    /**
+     * 此时的处理只有+,-操作从链表头一次进行计算即可
+     * @param list
+     * @param list2
+     * @return
+     */
     private static int getSum(LinkedList<String> list, LinkedList<Integer> list2) {
         while(!list.isEmpty()&&!list2.isEmpty()){
             String st = list.pollFirst();
@@ -65,6 +84,12 @@ public class nibolan {
         return list2.getFirst();
     }
 
+    /**
+     * 添加temp数
+     * @param temp
+     * @param list
+     * @param list2
+     */
     private static void addNumber(int temp, LinkedList<String> list, LinkedList<Integer> list2) {
         if(!list.isEmpty()&&!list2.isEmpty()){
             String st = list.pollLast();
