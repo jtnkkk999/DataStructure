@@ -3,6 +3,8 @@ package com.example.lzl.java.niukelib.topic;
 import java.util.LinkedList;
 
 /**
+ * 没有使用用逆波兰表达式求解。我们通常的计算方式是中序遍历的计算。而计算机采用的是后序遍历的计算。
+ *
  * 计算String求结果，包含(),+,-,*,/
  * 1.通过链表对数字和符号进行存储，方便从后加入，从前提取。
  * 2.以（）为小集合进行一次结果的计算。
