@@ -221,12 +221,16 @@ public class AllSort {
      * @param i
      */
     private static void swap(int[] st, int j, int i) {
+        //异或方式
 //        st[i] = st[i]^st[j];
 //        st[j] = st[j]^st[i];
 //        st[i] = st[j]^st[i];
+        //变量交换
         int temp = st[j];
         st[j] = st[i];
         st[i] = temp;
+        //加法
+
     }
     private static void print(int[] st){
         for(int i = 0;i<st.length;i++){

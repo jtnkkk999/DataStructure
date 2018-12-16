@@ -2,7 +2,11 @@ package com.example.lzl.java.niukelib.prototype;
 
 public class LinkedList {
     /**
-     * 链表相关的问题
+     * 链表相关的问题:
+     *
+     * 1.链表的倒叙
+     * 2。链式基数排序，也就是桶排序：麻将先排序数字再排序花色，稳定的排序。
+     *    使用场景，数据量几十个，插入操作多的情况（数量少，但插入操作多，譬如麻将，扑克牌的整理操作）
      */
     public static class Node{
         int value;
@@ -28,15 +32,13 @@ public class LinkedList {
      */
     public static Node reverseNode(Node node){
         Node pre = null;
-        Node now = node;
         Node next;
-        while(now.next!=null){
-            next = now.next;
-            now.next = pre;
-            pre = now;
-            now = next;
+        while(node!=null){
+            next = node.next;
+            node.next = pre;
+            pre = node;
+            node = next;
         }
-        now.next = pre;
-        return now;
+        return pre;
     }
 }
