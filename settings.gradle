@@ -1,1 +1,1 @@
-include ':app', ':niukelib'
+include ':app', ':niukelib', ':design_mode_lib'

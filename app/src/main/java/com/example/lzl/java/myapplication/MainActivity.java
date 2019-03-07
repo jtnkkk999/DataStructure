@@ -1,8 +1,7 @@
 package com.example.lzl.java.myapplication;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.Manifest;;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -10,21 +9,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.lzl.java.myapplication.activity.TestActivity;
+import com.example.lzl.java.myapplication.activity.ViewActivity;
+
+/**
+ * 入口Activity,包含后续添加demo的入口。
+ *
+ * 当前包含动态获取权限的简单代码
+ */
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Button mBt_view;
+    private Button mBt_test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        intView();
+
         Log.e("yyy","权限前的代码");
 //        if (!CameraPermissionHelper.hasCameraPermission(this)) {
 //            CameraPermissionHelper.requestCameraPermission(this);
 //        }
+        //判断是否授权，如果没有授权，请求权限，请求权限的过程中后续的代码依然会被调用。
         if(!PermissionsHelper.hasCameraPermission(this)){
             Log.e("yyy","没有授权");
 //            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 0);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE
+                    },
+                    0);
         }
         Log.e("yyy",ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)+"--"
         +ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)+"--"+
@@ -32,6 +52,19 @@ public class MainActivity extends AppCompatActivity {
         Log.e("yyy","权限后的代码");
     }
 
+    private void intView() {
+        mBt_view = findViewById(R.id.bt_view);
+        mBt_view.setOnClickListener(this);
+        mBt_test = findViewById(R.id.bt_test);
+        mBt_test.setOnClickListener(this);
+    }
+
+    /**
+     * 权限回调代码
+     * @param requestCode 请求码：也就是自己填入的对应的值
+     * @param permissions 权限数组
+     * @param grantResults 请求结果
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -41,5 +74,17 @@ public class MainActivity extends AppCompatActivity {
         Log.e("yyy",ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)+"--"
                 +ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)+"--"+
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)+"--");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_view:
+                startActivity(new Intent(this,ViewActivity.class));
+                break;
+            case R.id.bt_test:
+                startActivity(new Intent(this,TestActivity.class));
+                break;
+        }
     }
 }

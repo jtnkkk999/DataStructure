@@ -173,6 +173,56 @@ public class BalanceBinaryTree {
         }
     }
 
+    public boolean insertElement(int data){
+        TreeNode node = root;
+        if(node == null){
+            root = new TreeNode(data);
+            root.balance = 0;
+            size++;
+            return true;
+        }else{
+            //1.找插入的位置
+            int cmp = 0;
+            Comparable d = data;
+            TreeNode parent = null;
+            while(node!=null){
+                parent = node;
+                cmp = d.compareTo(data);
+                if(cmp>0){
+                    node = node.rightChild;
+                }else if(cmp<0){
+                    node = node.leftChild;
+                }else{
+                    return false;
+                }
+
+            }
+            //2.插入数据,按搜索二叉树插入
+            TreeNode child = new TreeNode(data);
+            if(cmp>0){
+                parent.rightChild = child;
+            }else{
+                parent.leftChild = child;
+            }
+            //3.检查平衡，回溯修正
+            while(parent!=null){
+                cmp = d.compareTo(parent.data);
+                if(cmp<0){
+                    parent.balance++;
+                }else{
+                    parent.balance--;
+                }
+                //插入当前节点后平衡，而且是0，将不影响后续节点的平衡性，可直接返回。
+                if(parent.balance ==0){
+                    break;
+                }
+            }
+
+        }
+        size++;
+        return true;
+    }
+
 
     /**
      * 二叉搜索树所使用的节点
@@ -182,7 +232,7 @@ public class BalanceBinaryTree {
         int balance = 0;//平衡因子
         TreeNode leftChild;
         TreeNode rightChild;
-        TreeNode parent;
+        TreeNode parent = null;
 
         public TreeNode(int data) {
             this.data = data;
