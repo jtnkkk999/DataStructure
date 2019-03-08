@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * IDCardFactory IDCard工厂
+ * IDCard
  */
 public class IDCardFactory extends Factory{
     private List owners = new ArrayList();

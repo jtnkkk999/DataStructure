@@ -1,5 +1,8 @@
 package gesture.imisoftware.com.design_mode_lib.factoryMethod;
 
+/**
+ * IDCard
+ */
 public class IDCard extends Product{
     private String owner;
     IDCard(String owner){

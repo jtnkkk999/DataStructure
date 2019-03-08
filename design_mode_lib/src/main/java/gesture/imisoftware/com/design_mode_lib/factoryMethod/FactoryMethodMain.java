@@ -2,6 +2,7 @@ package gesture.imisoftware.com.design_mode_lib.factoryMethod;
 
 /**
  * 只要是工厂模式，在生成实例时，一定会用到模板方法设计模式
+ * frameworks是不用修改的，idcard是具体的某个
  */
 public class FactoryMethodMain {
     public static void main(String[] args){
