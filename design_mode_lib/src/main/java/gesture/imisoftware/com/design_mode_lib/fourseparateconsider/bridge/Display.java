@@ -22,6 +22,4 @@ public class Display {
         print();
         close();
     }
-
-
 }
