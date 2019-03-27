@@ -2,7 +2,7 @@ package gesture.imisoftware.com.design_mode_lib.templateMethod;
 
 
 /**
- * 模板方法设计模式：
+ * 模板方法设计模式：1.抽象类
  */
 public class TemplateMethodMain {
     public static void main(String[] args){

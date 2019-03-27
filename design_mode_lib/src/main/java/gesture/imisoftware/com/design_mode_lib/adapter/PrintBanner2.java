@@ -1,5 +1,7 @@
 package gesture.imisoftware.com.design_mode_lib.adapter;
-
+/**
+ * 对象适配
+ */
 public class PrintBanner2 implements Print{
 
     private final Banner mBanner;
