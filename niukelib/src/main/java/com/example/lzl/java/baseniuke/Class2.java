@@ -20,7 +20,7 @@ import java.util.Random;
 public class Class2 {
     public static void main(String[] args){
         //快速排序
- //       int[] array = {3,5,1,2,9,7,8,4,5,6,7};
+        //       int[] array = {3,5,1,2,9,7,8,4,5,6,7};
 //        quickSort(array,0,array.length-1);
 //        for(int i = 0;i<array.length;i++){
 //            System.out.println(array[i]);
@@ -34,7 +34,6 @@ public class Class2 {
 //        }
         int[] array = {1,2,3,4,5,6,7,8,9,10};
         getZhongWeiNumber(array);
-
     }
 
     /**
