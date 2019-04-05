@@ -1,10 +1,25 @@
 package com.example.lzl.java.baseniuke;
 
+import javax.sound.sampled.Line;
+
 /**
  * 1.猫，狗，动物 实现stack返回，用到装饰模式，对猫狗类进行再次包装。
  * 2.打印算法。1）转圈打印，思想是（左上角的点和右下角）的点，进行打印缩进
  *             2)顺时针旋转一圈，暂定只能是正方形
- *             3）之字打印
+ *             3）之字打印，a,b两个点的指针移动
+ * 3.排好序的矩阵找数，
+ * 4.链表问题，往往是优化在空间复杂度上。时间上往往是O(N)面试需要空间低，笔试先过为主，不考虑空间
+ *      1）链表是不是回文链表：使用stack，进行比对，
+ *                            快慢指针压栈对比
+ *      2)链表荷兰国旗问题：使用链表数组，处理完再穿成链表
+ *                         三个引用，小于的，等于的，大于的（头和尾的指针），常数的空间处理，串起来，还能保证稳定性
+ *      3）带有random的链表拷贝：hashmap保存key,value（原节点，拷贝节点）
+ *                              源节点，拷贝节点，串起来。每次拿两个。
+ *      4）一个链表有环还是无环：有环，返回成环的那个节点，无环返回空----快慢指针，第一次相遇后，快指针回到头节点，变为一次走一步，当再次相遇便是成环节点
+ *
+ *
+ *
+ *
  */
 public class Class4 {
     public static void main(String[] args) {
@@ -25,12 +40,66 @@ public class Class4 {
 //            System.out.println();
 //        }
         //3）之子打印
-        System.out.println("之子打印");
-        int[][] b = {{1, 2,  3,  4, 20},
-                    {5,  6,  7,  8, 20},
-                    {9,  10, 11, 12,20},
-                    {13, 14, 15, 16,20}};
-        printZhi(b);
+//        System.out.println("之子打印");
+//        int[][] b = {{1, 2,  3,  4, 20},
+//                    {5,  6,  7,  8, 20},
+//                    {9,  10, 11, 12,20},
+//                    {13, 14, 15, 16,20}};
+//        printZ
+        //4.链表回文判断
+        Bean bean = new Bean(1,new Bean(2,new Bean(3,new Bean(5,new Bean(1,null)))));
+        Bean slow = bean;
+        Bean fast = bean;
+        while(fast.next!=null&& fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        fast = slow.next;
+        fast = reverseList(fast);
+        Bean temp = bean;
+        Boolean istrue = true;
+        Bean fastCopy = fast;
+        while(fast!=null){
+            if(temp.value == fast.value){
+                temp = temp.next;
+                fast = fast.next;
+            }else{
+                istrue = false;
+                break;
+            }
+        }
+        fast = reverseList(fastCopy);
+        slow.next = fast;
+        System.out.println(istrue);
+        Bean b = bean;
+        while(b!=null){
+            System.out.println(b.value);
+            b = b.next;
+        }
+    }
+
+    private static boolean LinkedListJudgeHuiWenShu(Bean bean) {
+        Bean fast  = bean;
+        Bean slow = bean;
+        while(fast.next!=null&&fast.next.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        reverseList(slow);
+        return true;
+    }
+
+    private static Bean reverseList(Bean slow) {
+        Bean now = slow;
+        Bean pre = null;
+        Bean next;
+        while (now!=null){
+            next = now.next;
+            now.next = pre;
+            pre = now;
+            now = next;
+        }
+        return pre;
     }
 
     private static void printZhi(int[][] array) {
@@ -128,6 +197,14 @@ public class Class4 {
             System.out.print(array[i--][j]+" ");
         }
         System.out.println();
+    }
+    static class Bean{
+        private int value;
+        private Bean next;
+        public Bean(int value,Bean bean){
+            this.value = value;
+            next = bean;
+        }
     }
 
 }
