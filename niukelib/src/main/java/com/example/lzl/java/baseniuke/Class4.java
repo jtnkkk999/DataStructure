@@ -17,9 +17,6 @@ import javax.sound.sampled.Line;
  *                              源节点，拷贝节点，串起来。每次拿两个。
  *      4）一个链表有环还是无环：有环，返回成环的那个节点，无环返回空----快慢指针，第一次相遇后，快指针回到头节点，变为一次走一步，当再次相遇便是成环节点
  *
- *
- *
- *
  */
 public class Class4 {
     public static void main(String[] args) {
@@ -47,35 +44,43 @@ public class Class4 {
 //                    {13, 14, 15, 16,20}};
 //        printZ
         //4.链表回文判断
-        Bean bean = new Bean(1,new Bean(2,new Bean(3,new Bean(5,new Bean(1,null)))));
-        Bean slow = bean;
-        Bean fast = bean;
-        while(fast.next!=null&& fast.next.next!=null){
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        fast = slow.next;
-        fast = reverseList(fast);
-        Bean temp = bean;
-        Boolean istrue = true;
-        Bean fastCopy = fast;
-        while(fast!=null){
-            if(temp.value == fast.value){
-                temp = temp.next;
-                fast = fast.next;
-            }else{
-                istrue = false;
-                break;
-            }
-        }
-        fast = reverseList(fastCopy);
-        slow.next = fast;
-        System.out.println(istrue);
-        Bean b = bean;
-        while(b!=null){
-            System.out.println(b.value);
-            b = b.next;
-        }
+//        Bean bean = new Bean(1,new Bean(2,new Bean(3,new Bean(5,new Bean(1,null)))));
+//        Bean slow = bean;
+//        Bean fast = bean;
+//        while(fast.next!=null&& fast.next.next!=null){
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        }
+//        fast = slow.next;
+//        fast = reverseList(fast);
+//        Bean temp = bean;
+//        Boolean istrue = true;
+//        Bean fastCopy = fast;
+//        while(fast!=null){
+//            if(temp.value == fast.value){
+//                temp = temp.next;
+//                fast = fast.next;
+//            }else{
+//                istrue = false;
+//                break;
+//            }
+//        }
+//        fast = reverseList(fastCopy);
+//        slow.next = fast;
+//        System.out.println(istrue);
+//        Bean b = bean;
+//        while(b!=null){
+//            System.out.println(b.value);
+//            b = b.next;
+//        }
+        //5.判断两个链表是否相交
+        //1.首先判断两个链表是否有环，有环返回成环的点，无环返回null：快慢指针，当快指针为null，返回null，当快指针和慢指针相交，让快指针回到起始点，走一步
+        //下一次的相交便是成环的点。（结论，技巧）
+        //2.分情况处理：1）当返回都为null，则比较两个链表最后的值是否相等，不相等则没共同节点，相等则从长链表的链表长度差值开始比对，找到相同的节点。
+        //              2）一个null。一个有值，则不存在交点。
+        //              3）两个都有值:
+        //                  先判断两个交点是否相等，相等则是跟1）情况一样，
+        //                  再判断交点是否在环上，通过一个节点走一遍知道回到原点是否碰到另一个交点，有则返回相交点。否则美交点。
     }
 
     private static boolean LinkedListJudgeHuiWenShu(Bean bean) {
