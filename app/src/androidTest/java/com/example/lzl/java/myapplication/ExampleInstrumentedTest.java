@@ -7,6 +7,11 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import static org.junit.Assert.*;
 
 /**
@@ -22,5 +27,17 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.example.lzl.java.myapplication", appContext.getPackageName());
+    }
+    @Test
+    public void readFiles(){
+        Queue<Integer> que = new LinkedList<>();
+        que.offer(1);
+        que.offer(2);
+        que.offer(3);
+        que.offer(4);
+        Iterator<Integer> iterator = que.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
     }
 }

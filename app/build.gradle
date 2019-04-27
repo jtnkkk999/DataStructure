@@ -16,7 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '28.0.2'
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+//    buildToolsVersion '28.0.2'
 }
 
 dependencies {
