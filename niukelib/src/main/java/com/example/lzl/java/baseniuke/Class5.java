@@ -41,7 +41,12 @@ public class Class5 {
         //判断一个数是否是平衡树
 //        System.out.print(judgeBalanceTree(tree));
         //判断一个树为搜索二叉树
-        System.out.print(judgeSearchBalanceTree(tree));
+//        System.out.print(judgeSearchBalanceTree(tree));
+        try{
+            return;
+        }finally {
+            System.out.print("进入finally");
+        }
 
     }
 
