@@ -1,6 +1,4 @@
-package com.example.lzl.java.multithread.thread.class_read_write_Lock;
-
-import java.util.Arrays;
+package com.example.lzl.java.multithread.thread.class6_read_write_Lock;
 
 /**
  * 读写锁模式

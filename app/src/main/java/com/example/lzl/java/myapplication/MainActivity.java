@@ -24,33 +24,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBt_view;
     private Button mBt_test;
 
+    private Thread mThread;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mThread = new Thread(new Runnable() {
+            volatile int i = 0;
+            @Override
+            public void run() {
+                Log.e("==========","!!!!!!!!!!!!!!");
+                Log.e("==========",Thread.currentThread().isInterrupted()+"");
+                while (!Thread.currentThread().isInterrupted()){
+                    i++;
+                    Log.e("===",i+"");
+                }
 
-        intView();
-
-        Log.e("yyy","权限前的代码");
-//        if (!CameraPermissionHelper.hasCameraPermission(this)) {
-//            CameraPermissionHelper.requestCameraPermission(this);
-//        }
-        //判断是否授权，如果没有授权，请求权限，请求权限的过程中后续的代码依然会被调用。
-        if(!PermissionsHelper.hasCameraPermission(this)){
-            Log.e("yyy","没有授权");
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
-            ActivityCompat.requestPermissions(this,
-                    new String[]{
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_PHONE_STATE
-                    },
-                    0);
-        }
-        Log.e("yyy",ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)+"--"
-        +ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)+"--"+
-                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)+"--");
-        Log.e("yyy","权限后的代码");
+//                if(Thread.interrupted()){
+//                    try {
+//                        throw new InterruptedException();
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+            }
+        });
+        mThread.start();
+        Log.e("======",mThread.isAlive()+":"+mThread.toString());
     }
+
+    public void onClick(View view) {
+        mThread.interrupt();
+    }
+
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        intView();
+//
+//        Log.e("yyy","权限前的代码");
+////        if (!CameraPermissionHelper.hasCameraPermission(this)) {
+////            CameraPermissionHelper.requestCameraPermission(this);
+////        }
+//        //判断是否授权，如果没有授权，请求权限，请求权限的过程中后续的代码依然会被调用。
+//        if(!PermissionsHelper.hasCameraPermission(this)){
+//            Log.e("yyy","没有授权");
+////            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                            Manifest.permission.READ_PHONE_STATE
+//                    },
+//                    0);
+//        }
+//        Log.e("yyy",ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)+"--"
+//        +ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)+"--"+
+//                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)+"--");
+//        Log.e("yyy","权限后的代码");
+//    }
 
     private void intView() {
         mBt_view = findViewById(R.id.bt_view);
@@ -76,15 +109,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)+"--");
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.bt_view:
-                startActivity(new Intent(this,ViewActivity.class));
-                break;
-            case R.id.bt_test:
-                startActivity(new Intent(this,TestActivity.class));
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()){
+//            case R.id.bt_view:
+//                startActivity(new Intent(this,ViewActivity.class));
+//                break;
+//            case R.id.bt_test:
+//                startActivity(new Intent(this,TestActivity.class));
+//                break;
+//        }
+//    }
 }

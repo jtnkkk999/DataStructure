@@ -2,7 +2,6 @@ package com.example.lzl.java.baseniuke;
 
 import java.util.Stack;
 
-import sun.reflect.generics.tree.Tree;
 
 /**
  * 1.二叉树的遍历。递归和非递归方式。递归系统帮助压栈，可以理解成三次来到对应节点的流程。理解清楚后，便可以通过自己进行压栈操作，改成非递归的方式。
