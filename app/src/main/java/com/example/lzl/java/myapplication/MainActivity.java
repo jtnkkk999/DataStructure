@@ -2,6 +2,8 @@ package com.example.lzl.java.myapplication;
 
 import android.Manifest;;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +15,8 @@ import android.widget.Button;
 
 import com.example.lzl.java.myapplication.activity.TestActivity;
 import com.example.lzl.java.myapplication.activity.ViewActivity;
+import com.example.lzl.java.myapplication.utils.Misc;
+import com.example.lzl.java.myapplication.utils.Misc2;
 
 /**
  * 入口Activity,包含后续添加demo的入口。
@@ -25,65 +29,80 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBt_test;
 
     private Thread mThread;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mThread = new Thread(new Runnable() {
-            volatile int i = 0;
-            @Override
-            public void run() {
-                Log.e("==========","!!!!!!!!!!!!!!");
-                Log.e("==========",Thread.currentThread().isInterrupted()+"");
-                while (!Thread.currentThread().isInterrupted()){
-                    i++;
-                    Log.e("===",i+"");
-                }
-
-//                if(Thread.interrupted()){
-//                    try {
-//                        throw new InterruptedException();
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//        mThread = new Thread(new Runnable() {
+//            volatile int i = 0;
+//            @Override
+//            public void run() {
+//                Log.e("==========","!!!!!!!!!!!!!!");
+//                Log.e("==========",Thread.currentThread().isInterrupted()+"");
+//                while (!Thread.currentThread().isInterrupted()){
+//                    i++;
+//                    Log.e("===",i+"");
 //                }
-            }
-        });
-        mThread.start();
-        Log.e("======",mThread.isAlive()+":"+mThread.toString());
-    }
+//            }
+//        });
+//        mThread.start();
+//        Log.e("======",mThread.isAlive()+":"+mThread.toString());
+//    }
 
     public void onClick(View view) {
         mThread.interrupt();
     }
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        intView();
-//
-//        Log.e("yyy","权限前的代码");
-////        if (!CameraPermissionHelper.hasCameraPermission(this)) {
-////            CameraPermissionHelper.requestCameraPermission(this);
-////        }
-//        //判断是否授权，如果没有授权，请求权限，请求权限的过程中后续的代码依然会被调用。
-//        if(!PermissionsHelper.hasCameraPermission(this)){
-//            Log.e("yyy","没有授权");
-////            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{
-//                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                            Manifest.permission.READ_PHONE_STATE
-//                    },
-//                    0);
+    private volatile int p = 0;
+    private Handler mHandler = new Handler();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        intView();
+
+        Log.e("yyy","权限前的代码");
+//        if (!CameraPermissionHelper.hasCameraPermission(this)) {
+//            CameraPermissionHelper.requestCameraPermission(this);
 //        }
-//        Log.e("yyy",ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)+"--"
-//        +ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)+"--"+
-//                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)+"--");
-//        Log.e("yyy","权限后的代码");
-//    }
+        //判断是否授权，如果没有授权，请求权限，请求权限的过程中后续的代码依然会被调用。
+        if(!PermissionsHelper.hasCameraPermission(this)){
+            Log.e("yyy","没有授权");
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE
+                    },
+                    0);
+        }
+        Log.e("yyy",ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)+"--"
+        +ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)+"--"+
+                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)+"--");
+        Log.e("yyy","权限后的代码");
+        Misc2 misc2 = new Misc2(this);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    p++;
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+//                    Looper.prepare();
+//                    Misc.showToast(MainActivity.this,p+"");
+//                    Looper.loop();
+//                    runOnUiThread(()->Misc.showToast(MainActivity.this,p+""));
+                    runOnUiThread(()->misc2.toastShow(p+""));
+                }
+            }
+        }).start();
+//        mHandler.post()
+    }
 
     private void intView() {
         mBt_view = findViewById(R.id.bt_view);

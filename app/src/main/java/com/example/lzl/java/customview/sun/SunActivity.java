@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.example.lzl.java.myapplication.R;
 
+import java.util.concurrent.ExecutorService;
+
 public class SunActivity extends AppCompatActivity {
 
     private SunView mSun;

@@ -10,7 +10,8 @@ package com.example.lzl.java.baseniuke;
  *                                           2)log(b,a)=d -> N^d*log(N)
  *                                           3)log(b,a)<d -> N^d
  * 5.归并排序，以及应用 O(n*logn)  分治思想 归并排序的速度快是因为每个组内是有序的，不会浪费比较。
- * 6.小和问题，逆序列问题
+ * 6.小和问题， 1,2,3,4   1+ 1+2 + 1+2+3  =
+ *   逆序列问题  当i<j 时 a[i]>a[j]
  */
 public class Class1 {
     public static void main(String[] args){
@@ -68,10 +69,10 @@ public class Class1 {
 //                sum+= copy[ll-l]*(r-lf+1);小和问题
                 ll++;
             }else if(copy[ll-l]>copy[lf-l]){
-                for(int i = ll;i<=center;i++){
-                    System.out.println(copy[ll-l]+"--"+copy[i-l]);
-                }
-//                System.out.println(copy[ll-l]+"--"+copy[lf-l]);//逆序对问题
+//                for(int i = ll;i<=center;i++){
+//                    System.out.println(copy[ll-l]+"--"+copy[i-l]);
+//                }
+                System.out.println(copy[ll-l]+"--"+copy[lf-l]);//逆序对问题
                 a[w++] = copy[lf-l];
                 lf++;
             }
@@ -84,19 +85,19 @@ public class Class1 {
      * @param a
      */
     public static void mergeSort(int[] a,int l,int r){
-        //1.终止条件。,当只有一个数的时候已经排好了
-        if(l>=r){
-            return;
-        }
-        //2.递归逻辑
-        //1)分成两部分
-        int center = l+((r-l)>>1);
-        //2）左部分排序
-        mergeSort(a,l,center);
-        //3）右部分排序
-        mergeSort(a,center+1,r);
-        //4）此时左右部分排好序，将两个排好序的数组重新排序
-        merge(a,l,center,r);
+//        //1.终止条件。,当只有一个数的时候已经排好了
+//        if(l>=r){
+//            return;
+//        }
+//        //2.递归逻辑
+//        //1)分成两部分
+//        int center = l+((r-l)>>1);
+//        //2）左部分排序
+//        mergeSort(a,l,center);
+//        //3）右部分排序
+//        mergeSort(a,center+1,r);
+//        //4）此时左右部分排好序，将两个排好序的数组重新排序
+//        merge(a,l,center,r);
     }
 
     private static void merge(int[] a, int l, int center, int r) {
