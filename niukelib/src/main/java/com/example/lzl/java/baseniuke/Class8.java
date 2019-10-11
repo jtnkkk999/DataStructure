@@ -27,5 +27,28 @@ package com.example.lzl.java.baseniuke;
  *
  */
 public class Class8 {
-
+    public static class  Node{
+        public Node(int value,Node next){
+            this.value = value;
+            this.next = next;
+        }
+        Node next;
+        int value;
+    }
+    public static void main(String[] args){
+        Node head = new Node(1,new Node(2,new Node(3,new Node(4,null))));
+        Node pre= null;
+        Node next;
+        while(head!=null){
+            next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        while(pre!=null){
+            System.out.println(pre.value);
+            pre = pre.next;
+        }
+    }
 }
+

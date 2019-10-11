@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
@@ -128,6 +129,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)+"--");
     }
 
+    public void crash(View view) {
+        int a = 1/0;
+    }
+
 //    @Override
 //    public void onClick(View v) {
 //        switch (v.getId()){
@@ -138,5 +143,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                startActivity(new Intent(this,TestActivity.class));
 //                break;
 //        }
+//    }
+
+    //调用的Acitivity加上这个
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
 //    }
 }

@@ -3,6 +3,8 @@ package com.example.lzl.java;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.lzl.java.savecrash.CrashHandler;
+
 public class APP extends Application {
     private static Context mContext;
 
@@ -11,6 +13,7 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
+        CrashHandler.getInstance().init(this);
     }
 
     public static Context getContext() {
