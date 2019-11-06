@@ -1,0 +1,3 @@
+JAVA:
+1.JNI 分配的对象是在栈上还是堆上？JNI 怎么调用 Java，Java 怎么调用 JNI，数据如何传递？JNI 与 JNA 有什么区别？
+答：

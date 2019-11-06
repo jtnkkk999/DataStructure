@@ -10,7 +10,7 @@ import java.util.TreeMap;
 import javax.swing.text.html.parser.Entity;
 
 /**
- * 搜索二叉树：左孩子比他要小，右孩子比他要大。
+ * 搜索二叉树：左孩子比他要小，右孩子比他要大。左孩子的最大值比头节点本身要小，右孩子最小值比头节点本身要大。
  * 平衡二叉树：左子树右子树高度差不超过。
  * HashMao:查找O(1)
  * TreeMap:以搜索二叉树组织起来的KEY,即红黑树,查找O(高度)
